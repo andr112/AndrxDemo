@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.zd.andrdemo.MainActivity">
+
+    <item
+        android:id="@+id/action_up"
+        android:orderInCategory="100"
+        android:title="@string/previous"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_next"
+        android:orderInCategory="100"
+        android:title="@string/next"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_to_b"
+        android:orderInCategory="100"
+        android:title="@string/testToB"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_deepLink"
+        android:orderInCategory="100"
+        android:title="@string/deepLink"
+        app:showAsAction="never" />
+</menu>
