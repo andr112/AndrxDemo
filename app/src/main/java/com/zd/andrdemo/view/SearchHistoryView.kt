@@ -30,7 +30,7 @@ class SearchHistoryView : View {
     private var mOverFlowIconDown: Drawable?
 
     //private var mOverFlowIconWight: Float
-    private val mOverFlowIconTag = "H"
+    private val mOverFlowIconTag = " "
 
     constructor(context: Context) : this(context, null)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -131,6 +131,13 @@ class SearchHistoryView : View {
         } else {
             val mBounds = Rect()
             mTextPaint.getTextBounds(data, 0, min(data.length, mMaxlength), mBounds)
+            if (data == mOverFlowIconTag) {
+                val icon = mOverFlowIconDown ?: mOverFlowIconUp
+                icon?.let {
+                    mBounds.right = icon.intrinsicWidth
+                    // mBounds.bottom=icon.intrinsicHeight
+                }
+            }
             mBounds.right += 2 * mItemPaddingHorizontal
             mBounds.bottom += 2 * mItemPaddingVertical
             mAllRects?.put(data, ItemPosition(mBounds))
