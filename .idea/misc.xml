@@ -5,6 +5,14 @@
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
     </configurations>
   </component>
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Administrator/Desktop/codes/zd/AndrxDemo/app/src/main/res/drawable/avd.xml" value="0.1" />
+        <entry key="..\:/Users/Administrator/Desktop/codes/zd/AndrxDemo/app/src/main/res/layout/fragment_animate.xml" value="0.14945652173913043" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

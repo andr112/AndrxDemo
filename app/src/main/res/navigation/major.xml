@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2019, The Android Open Source Project
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,25 +14,40 @@
   ~ limitations under the License.
   -->
 
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/major"
     app:startDestination="@+id/majorPage">
 
     <fragment
-            android:id="@+id/majorPage"
-            android:name="com.zd.andrdemo.MajorFragment"
-            android:label="@string/major"
-            tools:layout="@layout/fragment_home">
+        android:id="@+id/majorPage"
+        android:name="com.zd.andrdemo.MajorFragment"
+        android:label="@string/major"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_intent"
-            app:destination="@id/intentPage"/>
+            app:destination="@id/intentPage" />
+        <action
+            android:id="@+id/action_search"
+            app:destination="@id/searchPage" />
+        <action
+            android:id="@+id/action_animate"
+            app:destination="@id/animatePage" />
     </fragment>
     <fragment
         android:id="@+id/intentPage"
         android:name="com.zd.andrdemo.major.IntentFragment"
         android:label="@string/intent"
-        tools:layout="@layout/fragment_intent"/>
+        tools:layout="@layout/fragment_intent" />
+    <fragment
+        android:id="@+id/searchPage"
+        android:name="com.zd.andrdemo.major.SearchFragment"
+        android:label="@string/search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/animatePage"
+        android:name="com.zd.andrdemo.major.AnimateFragment"
+        android:label="@string/animate"
+        tools:layout="@layout/fragment_animate" />
 </navigation>

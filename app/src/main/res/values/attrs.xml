@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SearchHistoryView">
+        <attr name="limit" format="boolean" />
+        <attr name="limit_lines" format="integer" />
+        <attr name="text_color" format="color" />
+        <attr name="text_size" format="dimension" />
+        <attr name="text_max_length" format="integer" />
+        <attr name="item_background_color" format="color" />
+        <attr name="item_background_radius" format="dimension" />
+        <attr name="item_padding_horizontal" format="dimension" />
+        <attr name="item_padding_vertical" format="dimension" />
+        <attr name="margin_vertical" format="dimension" />
+        <attr name="margin_horizontal" format="dimension" />
+        <attr name="overFlowIconUp" format="reference" />
+        <attr name="overFlowIconDown" format="reference" />
+    </declare-styleable>
+</resources>
