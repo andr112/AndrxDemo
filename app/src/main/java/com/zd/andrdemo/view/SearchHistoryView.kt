@@ -206,8 +206,8 @@ class SearchHistoryView : View {
             lineNumber = lineNumber.coerceAtMost(mLimitLineCount)
         }
         mAllRects?.values?.forEach {
-            it.left = 0
-            it.top = 0
+            it.left = right
+            it.top = height
         }
         for (i in 0 until lineNumber) {
             val lineData: LineData = mAllLines!![i]
@@ -277,11 +277,19 @@ class SearchHistoryView : View {
     private var startY = 0.0f
     private fun marchTouchItem(startX: Float, startY: Float, x: Float, y: Float): String? {
         val item =
-            mAllRects?.filter { (key, position) -> position.left < startX && position.left + position.rect.width() > startX && position.top < startY && position.top + position.rect.height() > startY }
+            mAllRects?.filter { (_, position) ->
+                isPointInPosition(startX, startY, position) || isPointInPosition(x, y, position)
+            }
 
         val datas = item?.keys
 
-        return if (datas.isNullOrEmpty()) null else datas.first()
+        return if (datas.isNullOrEmpty()) null else datas.last()
+    }
+
+    private fun isPointInPosition(x: Float, y: Float, position: ItemPosition): Boolean {
+        val mgHorizontalHalf = mMarginHorizontal / 2
+        val mgVerticalHalf = mMarginVertical / 2
+        return position.left - mgHorizontalHalf < x && position.left + position.rect.width() + mgHorizontalHalf > x && position.top - mgVerticalHalf < y && position.top + position.rect.height() + mgVerticalHalf > y
     }
 
     internal class LineData(val lineNum: Int) {
