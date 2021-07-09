@@ -10,6 +10,10 @@ import android.view.View
 import com.zd.andrdemo.R
 import kotlin.math.min
 
+/**
+ * @功能描述:搜索历史记录，支持限制行数，展开和收起
+ * @作者:Xixi
+ */
 class SearchHistoryView : View {
     private var mTextPaint: TextPaint
     private var mItemBgPaint: Paint
@@ -209,54 +213,68 @@ class SearchHistoryView : View {
             it.left = right
             it.top = height
         }
+        var isOverFlowIconExtra = false
         for (i in 0 until lineNumber) {
             val lineData: LineData = mAllLines!![i]
-            val lineViews = lineData.views ?: break
+            val lineViews = lineData.items ?: break
             for (j in lineViews.indices) {
-                val data =
-                    if (i == lineNumber - 1 && j == lineViews.size - 1 && isOverFlow && isLimit) mOverFlowIconTag else lineViews[j]
-                var position = mAllRects!![data]
-                var rect = position!!.rect
-                position.left = left
-                position.top = top
-
-                val bg = RectF(
-                    left + rect.left.toFloat(),
-                    top.toFloat(),
-                    left + rect.right.toFloat(),
-                    top.toFloat() + lineData.height
-                )
-                val radius = mItemBgRadius.toFloat()
-                canvas.drawRoundRect(bg, radius, radius, mItemBgPaint)
-                if (data != mOverFlowIconTag)
-                    canvas.drawText(
-                        data, 0, data.length.coerceAtMost(mMaxlength),
-                        left.toFloat() + mItemPaddingHorizontal,
-                        top.toFloat() + lineData.height - mItemPaddingVertical,
-                        mTextPaint
-                    )
-                when {
-                    data == mOverFlowIconTag && isLimit() -> mOverFlowIconDown
-                    data == mOverFlowIconTag -> mOverFlowIconUp
-                    else -> null
-                }?.let {
-                    it.bounds = Rect(0, 0, it.intrinsicWidth, it.intrinsicHeight)
-                    canvas.save()
-                    canvas.translate(
-                        left.toFloat() + mItemPaddingHorizontal,
-                        top.toFloat() + mItemPaddingVertical
-                    )
-                    it.draw(canvas)
-                    canvas.restore()
+                val isLimitedOverFlowLast =
+                    i == lineNumber - 1 && j == lineViews.size - 1 && isOverFlow && isLimit
+                if (isLimitedOverFlowLast) {
+                    val contentWidth = width - paddingLeft - paddingRight
+                    val isFlagReplace =
+                        lineData.width + mMarginHorizontal + mAllRects!![mOverFlowIconTag]!!.rect.width() > contentWidth
+                    if (isFlagReplace) {
+                        left += drawItem(canvas, mOverFlowIconTag, lineData.height, left, top)
+                    } else {
+                        left += drawItem(canvas, lineViews[j], lineData.height, left, top)
+                        left += drawItem(canvas, mOverFlowIconTag, lineData.height, left, top)
+                    }
+                } else {
+                    left += drawItem(canvas, lineViews[j], lineData.height, left, top)
                 }
-
-                left += rect.width() + mMarginHorizontal
             }
             left = paddingLeft
             top += lineData.height + mMarginVertical
         }
     }
 
+    private fun drawItem(canvas: Canvas, data: String, lineHeight: Int, left: Int, top: Int): Int {
+        val position = mAllRects!![data]!!
+        position.left = left
+        position.top = top
+        val rect = position.rect
+        val bg = RectF(
+            left + rect.left.toFloat(),
+            top.toFloat(),
+            left + rect.right.toFloat(),
+            top.toFloat() + lineHeight
+        )
+        val radius = mItemBgRadius.toFloat()
+        canvas.drawRoundRect(bg, radius, radius, mItemBgPaint)
+        if (data != mOverFlowIconTag)
+            canvas.drawText(
+                data, 0, data.length.coerceAtMost(mMaxlength),
+                left.toFloat() + mItemPaddingHorizontal,
+                top.toFloat() + lineHeight - mItemPaddingVertical,
+                mTextPaint
+            )
+        when {
+            data == mOverFlowIconTag && isLimit() -> mOverFlowIconDown
+            data == mOverFlowIconTag -> mOverFlowIconUp
+            else -> null
+        }?.let {
+            it.bounds = Rect(0, 0, it.intrinsicWidth, it.intrinsicHeight)
+            canvas.save()
+            canvas.translate(
+                left.toFloat() + mItemPaddingHorizontal,
+                top.toFloat() + mItemPaddingVertical
+            )
+            it.draw(canvas)
+            canvas.restore()
+        }
+        return rect.width() + mMarginHorizontal
+    }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         when (event.action) {
@@ -293,11 +311,11 @@ class SearchHistoryView : View {
     }
 
     internal class LineData(val lineNum: Int) {
-        var views: MutableList<String>? = null
+        var items: MutableList<String>? = null
         var height = 0
         var width = 0
         fun addView(
-            childView: String,
+            item: String,
             contentTotalWidth: Int,
             rect: Rect,
             margin: Int
@@ -305,15 +323,16 @@ class SearchHistoryView : View {
             val tempW = if (width == 0) width else width + margin
             val isAdd = rect.width() + tempW <= contentTotalWidth
             if (isAdd) {
-                if (views == null) {
-                    views = java.util.ArrayList()
+                if (items == null) {
+                    items = java.util.ArrayList()
                 }
                 width = rect.width() + tempW
-                views!!.add(childView)
+                items!!.add(item)
                 height = height.coerceAtLeast(rect.height())
             }
             return isAdd
         }
+
     }
 
     interface OnHistoryItemClick {
@@ -321,4 +340,5 @@ class SearchHistoryView : View {
     }
 
     data class ItemPosition(val rect: Rect, var left: Int = 0, var top: Int = 0)
+
 }
