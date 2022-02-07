@@ -25,7 +25,7 @@ val majorListItems = listOf(
     ZdListItem(
         "animate",
         View.OnClickListener { v -> v.findNavController().navigate(R.id.action_animate) },
-        "动画相关"
+        "动画相关,自绘animated-vector三角形选中一圈动画"
     )
 )
 
