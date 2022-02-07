@@ -32,6 +32,6 @@ val majorListItems = listOf(
 val questionListItems = listOf(
     ZdListItem("intent",
         View.OnClickListener { v -> v.findNavController().navigate(R.id.action_intent) }),
-            ZdListItem("intent",
-    View.OnClickListener { v -> v.findNavController().navigate(R.id.action_intent) })
+    ZdListItem("intent",
+        View.OnClickListener { v -> v.findNavController().navigate(R.id.action_intent) })
 )
