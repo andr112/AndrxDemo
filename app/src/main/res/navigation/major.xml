@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_search"
             app:destination="@id/searchPage" />
+        <action
+            android:id="@+id/action_animate"
+            app:destination="@id/animatePage" />
     </fragment>
     <fragment
         android:id="@+id/intentPage"
@@ -42,4 +45,9 @@
         android:name="com.zd.andrdemo.major.SearchFragment"
         android:label="@string/search"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/animatePage"
+        android:name="com.zd.andrdemo.major.AnimateFragment"
+        android:label="@string/animate"
+        tools:layout="@layout/fragment_animate" />
 </navigation>

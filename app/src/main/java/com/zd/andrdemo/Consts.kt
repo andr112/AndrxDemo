@@ -12,10 +12,21 @@ val homeListItems = listOf(
         View.OnClickListener { v -> v.findNavController().navigate(R.id.action_navigation) })
 )
 val majorListItems = listOf(
-    ZdListItem("intent",
-        View.OnClickListener { v -> v.findNavController().navigate(R.id.action_intent) },"消息传递对象,用来请求操作（启动Activity、启动服务、传递广播）"),
-    ZdListItem("search",
-        View.OnClickListener { v -> v.findNavController().navigate(R.id.action_search) },"自定义搜索历史记录view ，默认展示两行，支持收起和展开")
+    ZdListItem(
+        "intent",
+        View.OnClickListener { v -> v.findNavController().navigate(R.id.action_intent) },
+        "消息传递对象,用来请求操作（启动Activity、启动服务、传递广播）"
+    ),
+    ZdListItem(
+        "search",
+        View.OnClickListener { v -> v.findNavController().navigate(R.id.action_search) },
+        "自定义搜索历史记录view ，默认展示两行，支持收起和展开"
+    ),
+    ZdListItem(
+        "animate",
+        View.OnClickListener { v -> v.findNavController().navigate(R.id.action_animate) },
+        "动画相关"
+    )
 )
 
 val questionListItems = listOf(
