@@ -17,8 +17,6 @@ class MajorFragment: Fragment() {
             ZdListAdapter(majorListItems)
 
         view.findViewById<RecyclerView>(R.id.zd_list).run {
-            // use this setting to improve performance if you know that changes
-            // in content do not change the layout size of the RecyclerView
             setHasFixedSize(true)
 
             // specify an viewAdapter (see also next example)
